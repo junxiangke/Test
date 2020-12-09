@@ -40,6 +40,7 @@ def loss_fn(pred, y_true):
 @tf.function(experimental_relax_shapes=True)
 def train_model(model, inputs, y_true, optimizer):
     embedding, lookup_table = inputs
+    embedding = embedding[1:]
     with tf.GradientTape() as tape:
         pred = model(embedding, lookup_table)
         cur_loss = loss_fn(pred, y_true)
